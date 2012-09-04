@@ -34,3 +34,5 @@ Now, compile:
 Download the zip file with the content folder at http://www.bridgeunitorzo.com/sites/default/files/WB.zip
 
 Extract the content folder to your base directory, and launch your brand new Worlds Beyond application!
+
+P.S. As I'm providing a binary for Windows, and documenting how I did it is a PITA, I'm skipping it for now. Eventually I'd like to get it compiling for VC++ anyways. I'd appreciate any help in that direction!
