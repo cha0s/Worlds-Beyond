@@ -1,0 +1,46 @@
+Index: SConstruct
+===================================================================
+--- SConstruct	(revision 9407)
++++ SConstruct	(working copy)
+@@ -288,7 +288,6 @@
+   'gcc': {
+     'all': {
+       'WARNINGFLAGS': ['-Wall',
+-                       '-Werror',
+                        '-W',
+                        '-Wno-unused-parameter',
+                        '-Wnon-virtual-dtor']
+Index: include/v8.h
+===================================================================
+--- include/v8.h	(revision 9407)
++++ include/v8.h	(working copy)
+@@ -2464,6 +2464,8 @@
+   virtual ~Extension() { }
+   virtual v8::Handle<v8::FunctionTemplate>
+       GetNativeFunction(v8::Handle<v8::String> name) {
++    v8::Handle<v8::String> *name_ = &name;
++    name_ = name_;
+     return v8::Handle<v8::FunctionTemplate>();
+   }
+ 
+@@ -3818,13 +3820,13 @@
+     return *reinterpret_cast<T*>(addr);
+   }
+ 
+-  static inline bool CanCastToHeapObject(void* o) { return false; }
+-  static inline bool CanCastToHeapObject(Context* o) { return true; }
+-  static inline bool CanCastToHeapObject(String* o) { return true; }
+-  static inline bool CanCastToHeapObject(Object* o) { return true; }
+-  static inline bool CanCastToHeapObject(Message* o) { return true; }
+-  static inline bool CanCastToHeapObject(StackTrace* o) { return true; }
+-  static inline bool CanCastToHeapObject(StackFrame* o) { return true; }
++  static inline bool CanCastToHeapObject(void* o) { o = o; return false; }
++  static inline bool CanCastToHeapObject(Context* o) { o = o; return true; }
++  static inline bool CanCastToHeapObject(String* o) { o = o; return true; }
++  static inline bool CanCastToHeapObject(Object* o) { o = o; return true; }
++  static inline bool CanCastToHeapObject(Message* o) { o = o; return true; }
++  static inline bool CanCastToHeapObject(StackTrace* o) { o = o; return true; }
++  static inline bool CanCastToHeapObject(StackFrame* o) { o = o; return true; }
+ };
+ 
+ }  // namespace internal
