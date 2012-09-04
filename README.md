@@ -1,3 +1,5 @@
+![wb logo](http://s3.amazonaws.com/ksr/projects/306704/photo-full.jpg?1345667807)
+
 Of course, first checkout this repository.
 
 You'll then need to checkout v8 in the chi directory. I'm using an older revision (I know, not ideal :), so I'm recommending you check the specific revision out until I can test compiling against the latest v8. You can check out the revision known to work with the engine like so:
