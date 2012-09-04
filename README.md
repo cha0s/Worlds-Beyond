@@ -23,6 +23,10 @@ After this, you need to run qmake to generate the Makefile:
 	cd ../..
 	qmake CONFIG+=release CONFIG-=debug
 
+You'll need to gather up some libraries...
+
+	sudo apt-get install libsdl1.2-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libboost-regex-dev libboost-filesystem-dev libboost-system-dev
+	
 Now, compile:
 
 	make -j4
