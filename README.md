@@ -4,41 +4,41 @@ NOTE: These instructions are tailored for Ubuntu-based distributions.
 
 Of course, first checkout this repository.
 
-You'll then need to checkout v8 in the lib directory. I'm using an older revision (I know, not ideal :), so I'm recommending you check the specific revision out until I can test compiling against the latest v8. You can check out the revision known to work with the engine like so:
+You'll then need to checkout v8 in the lib directory.
 
 	cd lib
-	svn checkout -r 9407 http://v8.googlecode.com/svn/trunk/ v8
+	git clone git://github.com/v8/v8.git v8
+	cd v8
 
-It'll take a bit to download. I provided a patch to fix a couple of quirks with this revision of v8. You need to apply the patch to compile v8 cleanly. Go into the v8 directory and apply the patch:
+It'll take a bit to download. I provided a patch to fix v8.
+This is because their team does not care about clean compilation: http://code.google.com/p/v8/issues/detail?id=2302
+You need to apply the patch to compile v8 cleanly. Go into the v8 directory and apply the patch:
 
-	cd v8/
-	patch -p0 < ../v8.patch
+	patch -p1 < ../v8.patch
 	
-You'll need some system libraries:
+You'll need to set up the system a bit.
 
-	sudo apt-get install libc6-dev-i386
+	sudo apt-get install libc6-dev-i386 libsdl1.2-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libboost-regex-dev libboost-filesystem-dev libboost-system-dev
+	make dependencies
 
 If you're on a 32-bit system run:
 
-	scons
+	make ia32.release
 
 Otherwise if you're on a 64-bit system, run:
 	
-	scons arch=x64
+	make ia64.release
 
-It will build for a while. Once it's done, rename the library:
+It will build for a while. Once it's done, rename the libraries:
 
-	mv libv8.a libv8-wb.a
+	mv out/ia32.release/obj.target/tools/gyp/libv8_base.a libv8-wb.a
+	mv out/ia32.release/obj.target/tools/gyp/libv8_snapshot.a libv8_snapshot-wb.a
 
 After this, you need to run qmake to generate the Makefile:
 
 	cd ../..
 	qmake CONFIG+=release CONFIG-=debug
 
-You'll need to gather up some libraries...
-
-	sudo apt-get install libsdl1.2-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libboost-regex-dev libboost-filesystem-dev libboost-system-dev
-	
 Now, compile:
 
 	make -j4

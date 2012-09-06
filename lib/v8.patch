@@ -1,29 +1,34 @@
-Index: SConstruct
-===================================================================
---- SConstruct	(revision 9407)
-+++ SConstruct	(working copy)
-@@ -288,7 +288,6 @@
-   'gcc': {
-     'all': {
-       'WARNINGFLAGS': ['-Wall',
--                       '-Werror',
-                        '-W',
-                        '-Wno-unused-parameter',
-                        '-Wnon-virtual-dtor']
-Index: include/v8.h
-===================================================================
---- include/v8.h	(revision 9407)
-+++ include/v8.h	(working copy)
-@@ -2464,6 +2464,8 @@
+diff --git a/include/v8.h b/include/v8.h
+index 3e1b427..fb7cb88 100644
+--- a/include/v8.h
++++ b/include/v8.h
+@@ -2546,6 +2546,7 @@ class V8EXPORT Extension {  // NOLINT
    virtual ~Extension() { }
    virtual v8::Handle<v8::FunctionTemplate>
        GetNativeFunction(v8::Handle<v8::String> name) {
-+    v8::Handle<v8::String> *name_ = &name;
-+    name_ = name_;
++    (void)(name);
      return v8::Handle<v8::FunctionTemplate>();
    }
  
-@@ -3818,13 +3820,13 @@
+@@ -3001,7 +3002,7 @@ typedef void (*JitCodeEventHandler)(const JitCodeEvent* event);
+ class V8EXPORT ExternalResourceVisitor {  // NOLINT
+  public:
+   virtual ~ExternalResourceVisitor() {}
+-  virtual void VisitExternalString(Handle<String> string) {}
++  virtual void VisitExternalString(Handle<String> string) {(void)(string);}
+ };
+ 
+ 
+@@ -3926,7 +3927,7 @@ class V8EXPORT OutputStream {  // NOLINT
+    * will not be called in case writing was aborted.
+    */
+   virtual WriteResult WriteHeapStatsChunk(HeapStatsUpdate* data, int count) {
+-    return kAbort;
++    (void)(data); (void)(count); return kAbort;
+   };
+ };
+ 
+@@ -4124,13 +4125,13 @@ class Internals {
      return *reinterpret_cast<T*>(addr);
    }
  
@@ -34,13 +39,13 @@ Index: include/v8.h
 -  static inline bool CanCastToHeapObject(Message* o) { return true; }
 -  static inline bool CanCastToHeapObject(StackTrace* o) { return true; }
 -  static inline bool CanCastToHeapObject(StackFrame* o) { return true; }
-+  static inline bool CanCastToHeapObject(void* o) { o = o; return false; }
-+  static inline bool CanCastToHeapObject(Context* o) { o = o; return true; }
-+  static inline bool CanCastToHeapObject(String* o) { o = o; return true; }
-+  static inline bool CanCastToHeapObject(Object* o) { o = o; return true; }
-+  static inline bool CanCastToHeapObject(Message* o) { o = o; return true; }
-+  static inline bool CanCastToHeapObject(StackTrace* o) { o = o; return true; }
-+  static inline bool CanCastToHeapObject(StackFrame* o) { o = o; return true; }
++  static inline bool CanCastToHeapObject(void* o) { (void)(o); return false; }
++  static inline bool CanCastToHeapObject(Context* o) { (void)(o); return true; }
++  static inline bool CanCastToHeapObject(String* o) { (void)(o); return true; }
++  static inline bool CanCastToHeapObject(Object* o) { (void)(o); return true; }
++  static inline bool CanCastToHeapObject(Message* o) { (void)(o); return true; }
++  static inline bool CanCastToHeapObject(StackTrace* o) { (void)(o); return true; }
++  static inline bool CanCastToHeapObject(StackFrame* o) { (void)(o); return true; }
  };
  
  }  // namespace internal
