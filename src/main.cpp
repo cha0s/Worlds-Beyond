@@ -22,7 +22,7 @@ std::string contentRoot(char **argv);
 chi::Script *enginePhase(const std::string &filename);
 
 int main(int argc, char **argv) {
-	CHI_UNUSED(argc);
+	WB_UNUSED(argc);
 
 	System::setResourceLocation(contentRoot(argv) + "/content");
 

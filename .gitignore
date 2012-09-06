@@ -1,1 +1,6 @@
-chi/v8
+lib/v8
+content/
+Makefile
+.project
+*.o
+wb

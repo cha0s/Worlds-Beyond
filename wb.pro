@@ -6,4 +6,4 @@ TEMPLATE = subdirs
 
 CONFIG += ordered
 
-SUBDIRS += chi/src src
+SUBDIRS += src
