@@ -96,7 +96,7 @@ WITH_DEBUG_V8 {
 	LIBS += -lv8-wbd
 }
 else {
-	LIBS += -lv8-wb
+	LIBS += -lv8-wb -lv8_snapshot-wb
 }
 win32:LIBS += -L/c/msys/1.0/mingw/3rdparty/lib -lmingw32 -lSDLmain  -lws2_32 -lwsock32 -lwinmm
 LIBS += -lSDL -lSDL_gfx -lSDL_image -lSDL_mixer -lSDL_ttf
